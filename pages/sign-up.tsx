@@ -1,15 +1,15 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import LoginForm from "@/components/auth/login-form/login-form";
+import SignUpForm from "@/components/auth/signUp/signUp-form";
 const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Login Page</title>
+        <title>SignUp Page</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <LoginForm />
+        <SignUpForm />
       </main>
     </div>
   );

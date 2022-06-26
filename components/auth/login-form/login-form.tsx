@@ -1,9 +1,10 @@
 import LightButton from "@/components/custom-components/buttons/light-button.component";
 import { Field, Form, Formik, FormikHelpers } from "formik";
+import Link from "next/link";
 import { AiOutlineGoogle, AiFillApple } from "react-icons/ai";
-import styles from "./login-form.module.css";
+import styles from "../auth.module.css";
 interface Values {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -23,12 +24,12 @@ const BUTTON_CONTENT = [
 export default function LoginForm() {
   return (
     <div className="vh-100 d-flex justify-content-center align-items-center">
-      <div className={`${styles.login_box}`}>
-        <div className={styles.login_box_head}>
+      <div className={`${styles.auth_box}`}>
+        <div className={styles.auth_box_head}>
           <h1 className="display-6 mb-3">Sign In</h1>
           <span>Welcome back, you&#39;ve been missed!</span>
         </div>
-        <div className={styles.login_box_button}>
+        <div className={styles.auth_box_button}>
           {BUTTON_CONTENT.map((content) => {
             return (
               <LightButton key={content.key} className="m-1  w-100">
@@ -37,12 +38,12 @@ export default function LoginForm() {
             );
           })}
         </div>
-        <div className={styles.login_box_divider}>
+        <div className={styles.auth_box_divider}>
           <span>OR</span>
         </div>
         <Formik
           initialValues={{
-            username: "",
+            email: "",
             password: "",
           }}
           onSubmit={(
@@ -75,7 +76,7 @@ export default function LoginForm() {
                 type="password"
               />
             </div>
-            <div className={styles.login_box_form_footer}>
+            <div className={styles.auth_box_form_footer}>
               <span>
                 <input type="checkbox" /> Remember Me
               </span>
@@ -88,10 +89,13 @@ export default function LoginForm() {
           </Form>
         </Formik>
         <div
-          className={`${styles.login_box_form_footer} d-flex justify-content-center`}
+          className={`${styles.auth_box_form_footer} d-flex justify-content-center`}
         >
           <span>
-            You haven&#39;t any account? <a href="#">Sign Up</a>
+            You haven&#39;t any account?{" "}
+            <Link href="/sign-up">
+              <a>Sign Up</a>
+            </Link>
           </span>
         </div>
       </div>

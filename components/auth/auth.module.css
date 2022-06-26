@@ -1,37 +1,37 @@
-.login_box {
+.auth_box {
   width: 30%;
   height: 80%;
   background-color: #fff;
   color: #4e5d78;
   font-weight: 500;
 }
-.login_box form {
+.auth_box form {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.login_box_head {
+.auth_box_head {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
-.login_box_head h1 {
+.auth_box_head h1 {
   font-weight: bold;
 }
 
-.login_box_head span {
+.auth_box_head span {
   font-size: 1.25rem;
 }
-.login_box_button {
+.auth_box_button {
   display: flex;
   justify-content: space-between;
   margin: 50px 0 40px;
 }
 
-.login_box_divider {
+.auth_box_divider {
   width: 100%;
   text-align: center;
   border-bottom: 1px solid #4e5d78;
@@ -39,7 +39,7 @@
   margin: 50px 0 40px;
 }
 
-.login_box_divider span {
+.auth_box_divider span {
   background: #fff;
   padding: 0 10px;
   font-size: large;
@@ -49,12 +49,12 @@
   width: 100%;
 }
 
-.login_box_form_footer {
+.auth_box_form_footer {
   display: flex;
   justify-content: space-between;
   margin: 10px 5px 20px 5px;
   align-content: center;
 }
-.login_box_form_footer a {
+.auth_box_form_footer a {
   text-decoration: none;
 }
