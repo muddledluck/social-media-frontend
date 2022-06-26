@@ -1,9 +1,9 @@
 import styles from "./styles.module.css";
 interface IMyProps {
-  children?: React.ReactChild;
+  children?: React.ReactChild | React.ReactChild[];
   className?: string;
 }
-const LightButton: React.FC = (props: IMyProps) => {
+const LightButton: React.FC<IMyProps> = (props) => {
   return (
     <button
       type="submit"
