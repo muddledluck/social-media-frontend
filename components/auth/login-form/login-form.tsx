@@ -12,6 +12,8 @@ import { MdAlternateEmail } from "react-icons/md";
 import { BiLockAlt } from "react-icons/bi";
 import styles from "../auth.module.css";
 import { useState } from "react";
+import FormWrapper from "@/components/auth/component/formWrapper";
+import FormHead from "@/components/auth/component/formHead";
 interface Values {
   email: string;
   password: string;
@@ -59,75 +61,70 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="vh-100 d-flex justify-content-center align-items-center">
-      <div className={`${styles.auth_box} p-3`}>
-        <div className={styles.auth_box_head}>
-          <h1 className="display-6 mb-3">Sign In</h1>
-          <span>Welcome back, you&#39;ve been missed!</span>
-        </div>
-        <div className={styles.auth_box_button}>
-          {BUTTON_CONTENT.map((content) => {
-            return (
-              <LightButton key={content.key} className="m-1  w-100">
-                <span>{content.symbol}</span> {content.title}
-              </LightButton>
-            );
-          })}
-        </div>
-        <div className={styles.auth_box_divider}>
-          <span>OR</span>
-        </div>
-        <Formik
-          initialValues={formik.initialValues}
-          onSubmit={() => formik.handleSubmit()}
-        >
-          <Form>
-            <InputGroup
-              symbol={<MdAlternateEmail />}
-              className="mb-3"
-              placeholder="Your Email"
-              id="email"
-              name="email"
-              ariaDescribedBy="emailHelp"
-              onChange={formik.handleChange}
-              value={formik.values.email}
-              type="email"
-            />
-            <InputGroup
-              symbol={<BiLockAlt />}
-              className="mb-3"
-              placeholder="Your Password"
-              id="password"
-              name="password"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-              type={isVisiblePassword ? "text" : "password"}
-              afterSymbol={afterSymbol()}
-            />
-
-            <div className={styles.auth_box_form_footer}>
-              <span>
-                <input type="checkbox" /> Remember Me
-              </span>
-              <span>Forgot Password?</span>
-            </div>
-
-            <button type="submit" className="btn btn-primary w-100 rounded-5">
-              Login
-            </button>
-          </Form>
-        </Formik>
-        <div
-          className={`${styles.auth_box_form_footer} d-flex justify-content-center`}
-        >
-          <span>
-            You haven&#39;t any account?{" "}
-            <Link href="/sign-up">
-              <a>Sign Up</a>
-            </Link>
-          </span>
-        </div>
+    <FormWrapper>
+      <FormHead title="Sign In" subTitle="Welcome back, you've been missed!" />
+      <div className={styles.auth_box_button}>
+        {BUTTON_CONTENT.map((content) => {
+          return (
+            <LightButton key={content.key} className="m-1  w-100">
+              <span>{content.symbol}</span> {content.title}
+            </LightButton>
+          );
+        })}
       </div>
-    </div>
+      <div className={styles.auth_box_divider}>
+        <span>OR</span>
+      </div>
+      <Formik
+        initialValues={formik.initialValues}
+        onSubmit={() => formik.handleSubmit()}
+      >
+        <Form>
+          <InputGroup
+            symbol={<MdAlternateEmail />}
+            className="mb-3"
+            placeholder="Your Email"
+            id="email"
+            name="email"
+            ariaDescribedBy="emailHelp"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            type="email"
+          />
+          <InputGroup
+            symbol={<BiLockAlt />}
+            className="mb-3"
+            placeholder="Your Password"
+            id="password"
+            name="password"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+            type={isVisiblePassword ? "text" : "password"}
+            afterSymbol={afterSymbol()}
+          />
+
+          <div className={styles.auth_box_form_footer}>
+            <span>
+              <input type="checkbox" /> Remember Me
+            </span>
+            <span>Forgot Password?</span>
+          </div>
+
+          <button type="submit" className="btn btn-primary w-100 rounded-5">
+            Login
+          </button>
+        </Form>
+      </Formik>
+      <div
+        className={`${styles.auth_box_form_footer} d-flex justify-content-center`}
+      >
+        <span>
+          You haven&#39;t any account?{" "}
+          <Link href="/sign-up">
+            <a>Sign Up</a>
+          </Link>
+        </span>
+      </div>
+    </FormWrapper>
   );
 }
