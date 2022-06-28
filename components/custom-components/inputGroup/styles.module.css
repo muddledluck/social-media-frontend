@@ -1,0 +1,13 @@
+.input_group_icon {
+  background-color: white;
+  padding-right: 0px;
+}
+.input_group_after_icon {
+  background-color: white;
+}
+
+.input_group_input {
+  border-left: 0;
+  padding-left: 8px;
+  border-right: 0;
+}

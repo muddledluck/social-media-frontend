@@ -1,7 +1,13 @@
+import InputGroup from "@/components/custom-components/inputGroup/input-group.component";
+import { ChangeEvent, useState } from "react";
 import { AiFillFacebook, AiOutlineSearch } from "react-icons/ai";
 import styles from "./navbar.module.css";
 const isLoggedIn = false;
 export default function Navbar() {
+  const [search, setSearch] = useState("");
+  const handleSearchChange = (e: ChangeEvent<any>) => {
+    setSearch(e.target.value);
+  };
   return (
     <div className={styles.navbar}>
       <div className={styles.navbar_logo}>
@@ -12,12 +18,11 @@ export default function Navbar() {
       </div>
       {isLoggedIn && (
         <div className={styles.navbar_search}>
-          <span className={styles.navbar_search_icon}>
-            <AiOutlineSearch />
-          </span>
-          <input
+          <InputGroup
+            onChange={handleSearchChange}
+            value={search}
+            symbol={<AiOutlineSearch />}
             type="text"
-            className={styles.navbar_search_input}
             placeholder="Search for anything here..."
           />
         </div>
