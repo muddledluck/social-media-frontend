@@ -1,16 +1,15 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { PROJECT_TITLE } from "@/utils/constant";
-import HomePage from "@/components/home";
+import LoginForm from "@/components/auth/login-form/login-form";
 const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>{PROJECT_TITLE}</title>
+        <title>Login</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <HomePage />
+        <LoginForm />
       </main>
     </div>
   );

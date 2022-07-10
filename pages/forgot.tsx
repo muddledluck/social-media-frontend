@@ -1,16 +1,15 @@
+import Forgot from "@/components/auth/forgot/forgot";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { PROJECT_TITLE } from "@/utils/constant";
-import HomePage from "@/components/home";
 const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>{PROJECT_TITLE}</title>
+        <title>Forgot</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <HomePage />
+        <Forgot />
       </main>
     </div>
   );

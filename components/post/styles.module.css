@@ -1,0 +1,8 @@
+.profileImage {
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 5px 5px 5px 5px;
+}
+.textarea {
+  height: 9vh;
+}

@@ -1,9 +1,13 @@
 import InputGroup from "@/components/custom-components/inputGroup/input-group.component";
+import { PROJECT_TITLE } from "@/utils/constant";
 import { ChangeEvent, useState } from "react";
 import { AiFillFacebook, AiOutlineSearch } from "react-icons/ai";
 import styles from "./navbar.module.css";
-const isLoggedIn = false;
-export default function Navbar() {
+
+interface NavbarProps {
+  isLoggedIn: boolean;
+}
+export default function Navbar({ isLoggedIn }: NavbarProps) {
   const [search, setSearch] = useState("");
   const handleSearchChange = (e: ChangeEvent<any>) => {
     setSearch(e.target.value);
@@ -14,7 +18,7 @@ export default function Navbar() {
         <span>
           <AiFillFacebook />
         </span>
-        <span>Facebook</span>
+        <span>{PROJECT_TITLE}</span>
       </div>
       {isLoggedIn && (
         <div className={styles.navbar_search}>

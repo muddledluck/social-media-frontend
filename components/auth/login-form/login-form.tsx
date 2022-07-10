@@ -107,7 +107,11 @@ export default function LoginForm() {
             <span>
               <input type="checkbox" /> Remember Me
             </span>
-            <span>Forgot Password?</span>
+            <span>
+              <Link href="/forgot">
+                <a>Forgot Password?</a>
+              </Link>
+            </span>
           </div>
 
           <button type="submit" className="btn btn-primary w-100 rounded-5">
