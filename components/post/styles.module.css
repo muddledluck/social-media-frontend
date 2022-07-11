@@ -1,11 +1,6 @@
 .createPost {
   background-color: white;
 }
-.createPost div {
-  margin: 2px 2px 2px 2px;
-  padding: 1px 1px 1px 1px;
-  /* border: solid 2px; */
-}
 
 .profileImage {
   border-radius: 50%;
@@ -13,7 +8,6 @@
   margin-right: 5px;
 }
 .textarea {
-  height: 9vh;
   width: 100%;
   border: none;
   border-radius: 10px;
@@ -21,8 +15,9 @@
   margin-left: 5px;
 }
 
-.textarea :focus {
+.textarea:focus {
   border: none;
+  box-shadow: none;
 }
 
 .postAction {

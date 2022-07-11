@@ -29,18 +29,23 @@ const postActions: PostActionInterface[] = [
 
 export default function CreatePost() {
   return (
-    <div className={styles.createPost}>
-      <div className="d-flex justify-content-center align-items-center">
+    <div className={`p-3 rounded-3 ${styles.createPost}`}>
+      <div className="d-flex justify-content-center align-items-center mb-3">
         <div className={styles.profileImage}>
           <Image
             src={randomAvatar()}
             width={50}
             height={50}
             alt="profileImage"
+            style={{ borderRadius: "100%" }}
           />
         </div>
-        <input placeholder="What's happening?" className={styles.textarea} />
+        <input
+          placeholder="What's happening?"
+          className={`form-control ${styles.textarea}`}
+        />
       </div>
+
       <div className="d-flex justify-content-between align-items-center">
         {postActions.map((action) => (
           <div className={styles.postAction} key={action.key}>
