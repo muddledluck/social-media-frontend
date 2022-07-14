@@ -7,7 +7,7 @@ const nextConfig = {
   defaultLocale: "en-US",
 
   images: {
-    domains: ['cloudflare-ipfs.com'],
+    domains: ["cloudflare-ipfs.com", "loremflickr.com"],
   },
 }
 

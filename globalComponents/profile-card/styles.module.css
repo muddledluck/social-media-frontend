@@ -1,0 +1,10 @@
+.profileImage {
+  background-color: white;
+}
+.content {
+  margin-left: 20px;
+}
+.cardName {
+  color: gray;
+  font-weight: 600;
+}

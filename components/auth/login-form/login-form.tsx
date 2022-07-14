@@ -1,5 +1,5 @@
-import LightButton from "@/components/custom-components/buttons/light-button.component";
-import InputGroup from "@/components/custom-components/inputGroup/input-group.component";
+import LightButton from "@/globalComponents/buttons/light-button.component";
+import InputGroup from "@/globalComponents/inputGroup/input-group.component";
 import { Form, Formik, FormikHelpers, useFormik } from "formik";
 import Link from "next/link";
 import {

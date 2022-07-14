@@ -1,6 +1,6 @@
 import { randomAvatar } from "@/utils/generateFakeData";
 import Image from "next/image";
-import styles from "./styles.module.css";
+import styles from "./createPost.module.css";
 import { VscDeviceCameraVideo } from "react-icons/vsc";
 import { MdOutlineInsertPhoto } from "react-icons/md";
 import { RiUserSmileLine } from "react-icons/ri";

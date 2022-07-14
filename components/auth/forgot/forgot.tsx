@@ -1,6 +1,6 @@
 import FormHead from "@/components/auth/component/formHead";
 import FormWrapper from "@/components/auth/component/formWrapper";
-import InputGroup from "@/components/custom-components/inputGroup/input-group.component";
+import InputGroup from "@/globalComponents/inputGroup/input-group.component";
 import Link from "next/link";
 import { useState } from "react";
 import { MdAlternateEmail } from "react-icons/md";

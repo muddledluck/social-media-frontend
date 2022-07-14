@@ -1,4 +1,4 @@
-import InputGroup from "@/components/custom-components/inputGroup/input-group.component";
+import InputGroup from "@/globalComponents/inputGroup/input-group.component";
 import { PROJECT_TITLE } from "@/utils/constant";
 import { ChangeEvent, useState } from "react";
 import { AiFillFacebook, AiOutlineSearch } from "react-icons/ai";

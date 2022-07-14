@@ -1,0 +1,19 @@
+.post {
+  background-color: white;
+  width: 700px;
+}
+
+.post_head svg {
+  font-size: 20px;
+  color: rgb(97, 97, 97);
+}
+
+.image_grid {
+  height: 500px;
+}
+
+.image_grid_two_img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
