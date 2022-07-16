@@ -11,8 +11,8 @@ type ImageSizeType = {
 
 const ImageGrid: React.FC<ImageGridProps> = ({ images }) => {
   const [imgSize, setImgSize] = useState<ImageSizeType>({
-    width: 200,
-    height: 200,
+    width: 500,
+    height: 500,
   });
   return (
     <div className="d-flex justify-content-center align-items-center">

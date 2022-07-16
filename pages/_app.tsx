@@ -3,13 +3,12 @@ import type { AppProps } from "next/app";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
 import ru from "javascript-time-ago/locale/ru.json";
-
-TimeAgo.addDefaultLocale(en);
-TimeAgo.addLocale(ru);
 import "../styles/globals.css";
 import Layout from "@/components/layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  TimeAgo.addDefaultLocale(en);
+  TimeAgo.addLocale(ru);
   return (
     <>
       <Layout>

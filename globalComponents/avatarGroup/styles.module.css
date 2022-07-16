@@ -1,0 +1,21 @@
+.avatar {
+  display: inline-block;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 100px;
+}
+
+.avatar:not(:first-child) {
+  margin-left: -60px;
+  -webkit-mask: radial-gradient(
+    circle 55px at 5px 50%,
+    transparent 99%,
+    #fff 100%
+  );
+  mask: radial-gradient(circle 55px at 5px 50%, transparent 99%, #fff 100%);
+}
+
+.avatar img {
+  width: 100%;
+  display: block;
+}

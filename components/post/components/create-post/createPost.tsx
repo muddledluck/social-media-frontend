@@ -4,11 +4,7 @@ import styles from "./createPost.module.css";
 import { VscDeviceCameraVideo } from "react-icons/vsc";
 import { MdOutlineInsertPhoto } from "react-icons/md";
 import { RiUserSmileLine } from "react-icons/ri";
-interface PostActionInterface {
-  key: string;
-  title: string;
-  icon: React.ReactNode | React.ReactNode[];
-}
+
 const postActions: PostActionInterface[] = [
   {
     key: "liveVideo",
