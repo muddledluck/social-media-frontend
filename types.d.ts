@@ -9,3 +9,8 @@ type PostActionInterface = {
   title: string;
   icon: React.ReactNode | React.ReactNode[];
 };
+
+type SymbolsType = {
+  icon: React.ReactNode;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+};

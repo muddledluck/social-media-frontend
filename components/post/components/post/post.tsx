@@ -12,27 +12,49 @@ import { BsThreeDots } from "react-icons/bs";
 import ImageGrid from "@/globalComponents/imageGrid";
 import AvatarGroup from "@/globalComponents/avatarGroup";
 import HorizontalDivider from "@/globalComponents/divider";
-import {
-  AiOutlineComment,
-  AiOutlineLike,
-  AiOutlineShareAlt,
-} from "react-icons/ai";
+import ProfileInput from "@/globalComponents/profileInput";
+import ICONS from "@/globalComponents/icons";
+
+const {
+  LikeOutline,
+  CommentOutline,
+  ShareAltOutline,
+  GifFileOutline,
+  FileImageOutline,
+  SmileLine,
+  SendOutline,
+} = ICONS;
 
 const postActions: PostActionInterface[] = [
   {
     key: "like",
     title: "Like",
-    icon: <AiOutlineLike />,
+    icon: <LikeOutline />,
   },
   {
     key: "comments",
     title: "Comments",
-    icon: <AiOutlineComment />,
+    icon: <CommentOutline />,
   },
   {
     key: "share",
     title: "Share",
-    icon: <AiOutlineShareAlt />,
+    icon: <ShareAltOutline />,
+  },
+];
+
+const profileInputIcons: SymbolsType[] = [
+  {
+    icon: <GifFileOutline />,
+    onClick: (e) => console.log("clicked"),
+  },
+  {
+    icon: <FileImageOutline />,
+    onClick: (e) => console.log("clicked"),
+  },
+  {
+    icon: <SmileLine />,
+    onClick: (e) => console.log("clicked"),
   },
 ];
 export default function Post() {
@@ -92,6 +114,15 @@ export default function Post() {
           ))}
         </div>
         <HorizontalDivider />
+        <div className="d-flex justify-content-between align-items-center">
+          <ProfileInput
+            placeholder="Write a comment..."
+            symbols={profileInputIcons}
+          />
+          <div className={`${styles.commentsSend} mb-3 ms-3`}>
+            <SendOutline />
+          </div>
+        </div>
       </div>
     </div>
   );

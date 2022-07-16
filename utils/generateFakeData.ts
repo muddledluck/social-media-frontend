@@ -27,3 +27,7 @@ export const randomAbstract = (
     Math.random() * 1000
   )}`;
 };
+
+export const randomLorem = (sentenceCount: number): string => {
+  return faker.lorem.lines(sentenceCount);
+};
