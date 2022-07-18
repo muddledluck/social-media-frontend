@@ -1,0 +1,9 @@
+.content {
+  display: inline-block;
+}
+.image {
+  border-radius: 10px;
+  overflow: hidden;
+  height: 55px;
+  width: 116px;
+}

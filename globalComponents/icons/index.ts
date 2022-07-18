@@ -9,6 +9,7 @@ import {
   AiOutlineSend,
   AiOutlineShareAlt,
 } from "react-icons/ai";
+import { BsThreeDots } from "react-icons/bs";
 const ICONS = {
   CameraVideo: VscDeviceCameraVideo,
   InsertPhoto: MdOutlineInsertPhoto,
@@ -18,7 +19,8 @@ const ICONS = {
   ShareAltOutline: AiOutlineShareAlt,
   GifFileOutline: AiOutlineFileGif,
   FileImageOutline: AiOutlineFileImage,
-  SendOutline: AiOutlineSend
+  SendOutline: AiOutlineSend,
+  HorizontalThreeDots: BsThreeDots,
 };
 
 export default ICONS;

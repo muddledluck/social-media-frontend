@@ -4,6 +4,11 @@ type likeType = {
   id: number;
 };
 
+type postType = {
+  content: string;
+  images: string[];
+};
+
 type PostActionInterface = {
   key: string;
   title: string;

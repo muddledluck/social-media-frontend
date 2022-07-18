@@ -19,7 +19,8 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/utils/*": ["utils/*"],
-      "@/globalComponents/*": ["globalComponents/*"]
+      "@/globalComponents/*": ["globalComponents/*"],
+      "@/slice/*": ["store/slices/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

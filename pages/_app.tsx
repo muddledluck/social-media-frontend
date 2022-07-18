@@ -5,16 +5,18 @@ import en from "javascript-time-ago/locale/en.json";
 import ru from "javascript-time-ago/locale/ru.json";
 import "../styles/globals.css";
 import Layout from "@/components/layout";
+import { Provider } from "react-redux";
+import { store } from "store/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  TimeAgo.addDefaultLocale(en);
+  TimeAgo.addLocale(en);
   TimeAgo.addLocale(ru);
   return (
-    <>
+    <Provider store={store}>
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </>
+    </Provider>
   );
 }
 

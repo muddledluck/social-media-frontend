@@ -1,6 +1,7 @@
 import styles from "./createPost.module.css";
 import ProfileInput from "@/globalComponents/profileInput";
 import ICONS from "@/globalComponents/icons";
+import { randomAvatar } from "@/utils/generateFakeData";
 
 const { CameraVideo, InsertPhoto, SmileLine } = ICONS;
 const postActions: PostActionInterface[] = [
@@ -24,7 +25,10 @@ const postActions: PostActionInterface[] = [
 export default function CreatePost() {
   return (
     <div className={`p-3 rounded-3 ${styles.createPost}`}>
-      <ProfileInput placeholder="What's happening?" />
+      <ProfileInput
+        placeholder="What's happening?"
+        profileImage={randomAvatar()}
+      />
       <div className="d-flex justify-content-between align-items-center">
         {postActions.map((action) => (
           <div className={styles.postAction} key={action.key}>

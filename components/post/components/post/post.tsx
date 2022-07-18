@@ -1,19 +1,13 @@
 import ProfileCard from "@/globalComponents/profile-card/profileCard";
-import {
-  randomAbstract,
-  randomAvatar,
-  randomDateBetween,
-  randomName,
-} from "@/utils/generateFakeData";
-import { useEffect, useState } from "react";
+import { randomAvatar } from "@/utils/generateFakeData";
 import styles from "./post.module.css";
 import TimeAgo from "@/globalComponents/timeAgo";
-import { BsThreeDots } from "react-icons/bs";
 import ImageGrid from "@/globalComponents/imageGrid";
 import AvatarGroup from "@/globalComponents/avatarGroup";
 import HorizontalDivider from "@/globalComponents/divider";
 import ProfileInput from "@/globalComponents/profileInput";
 import ICONS from "@/globalComponents/icons";
+import { PostStateInterface } from "@/slice/postSlices";
 
 const {
   LikeOutline,
@@ -23,6 +17,7 @@ const {
   FileImageOutline,
   SmileLine,
   SendOutline,
+  HorizontalThreeDots,
 } = ICONS;
 
 const postActions: PostActionInterface[] = [
@@ -57,31 +52,15 @@ const profileInputIcons: SymbolsType[] = [
     onClick: (e) => console.log("clicked"),
   },
 ];
-export default function Post() {
-  const [name, setName] = useState<string>("");
-  const [date, setDate] = useState<Date>(new Date());
-  const [images, setImages] = useState<string[]>([]);
-  const [likes, setLikes] = useState<likeType[]>([]);
 
-  useEffect(() => {
-    setName(randomName());
-    setDate(randomDateBetween());
-    [1].forEach(() => {
-      setImages((prevImages) => [...prevImages, randomAbstract(500, 500)]);
-    });
-    const numberOfLikedUsers = Math.random() * 10;
-    for (let i = 0; i <= numberOfLikedUsers; i++) {
-      setLikes((prevState) => [
-        ...prevState,
-        {
-          name: randomName(),
-          profileImage: randomAvatar(),
-          id: i,
-        },
-      ]);
-    }
-  }, []);
-
+export default function Post({
+  name,
+  date,
+  post,
+  likedUsers,
+  totalShare,
+  totalComments,
+}: PostStateInterface) {
   return (
     <div className={`p-3 rounded-3 ${styles.post}`}>
       <div className={`d-flex justify-content-between ${styles.post_head}`}>
@@ -90,18 +69,18 @@ export default function Post() {
           name={name}
           subName={<TimeAgo date={date} content={"public"} />}
         />
-        <BsThreeDots />
+        <HorizontalThreeDots />
       </div>
       <div className={styles.image_grid}>
-        <ImageGrid images={images} />
+        <ImageGrid images={post.images} />
       </div>
       <div
         className={`d-flex justify-content-between align-items-center ${styles.avatarGroup}`}
       >
-        <AvatarGroup users={likes} />
+        <AvatarGroup users={likedUsers} />
         <div>
-          <span>3</span> Comments
-          <span>17</span> Shares
+          <span>{totalComments}</span> Comments
+          <span>{totalShare}</span> Shares
         </div>
       </div>
       <div>
@@ -118,6 +97,7 @@ export default function Post() {
           <ProfileInput
             placeholder="Write a comment..."
             symbols={profileInputIcons}
+            profileImage={randomAvatar()}
           />
           <div className={`${styles.commentsSend} mb-3 ms-3`}>
             <SendOutline />
