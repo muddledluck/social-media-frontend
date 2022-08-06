@@ -20,7 +20,11 @@
       "@/components/*": ["components/*"],
       "@/utils/*": ["utils/*"],
       "@/globalComponents/*": ["globalComponents/*"],
-      "@/slice/*": ["store/slices/*"]
+      "@/slice/*": ["store/slices/*"],
+      "@/HOC/*": ["HOC/*"],
+      "@/helpers/*": ["helpers/*"],
+      "@/types/*": ["types/*"],
+      "@/api/*": ["api/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

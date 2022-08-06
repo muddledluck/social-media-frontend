@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import LoginForm from "@/components/auth/login-form/login-form";
-const Home: NextPage = () => {
+import { withDashboardRedirect } from "@/HOC/withAuth";
+const Login: NextPage = () => {
   return (
     <div>
       <Head>
@@ -15,4 +16,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default withDashboardRedirect(Login);

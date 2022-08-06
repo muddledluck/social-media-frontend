@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import SignUpForm from "@/components/auth/signUp/signUp-form";
-const Home: NextPage = () => {
+import { withDashboardRedirect } from "@/HOC/withAuth";
+const SignUp: NextPage = () => {
   return (
     <div>
       <Head>
@@ -15,4 +16,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default withDashboardRedirect(SignUp);

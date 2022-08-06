@@ -1,7 +1,7 @@
 import Forgot from "@/components/auth/forgot/forgot";
 import type { NextPage } from "next";
 import Head from "next/head";
-const Home: NextPage = () => {
+const Forget: NextPage = () => {
   return (
     <div>
       <Head>
@@ -15,4 +15,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Forget;

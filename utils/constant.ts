@@ -1,4 +1,4 @@
-export const PROJECT_TITLE: string = "Meetmax";
+export const PROJECT_TITLE: string = "Hello";
 
 export function getPreviousDay(date = new Date()) {
   const previous = new Date(date.getTime());

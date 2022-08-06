@@ -1,6 +1,7 @@
 import LightButton from "@/globalComponents/buttons/light-button.component";
 import InputGroup from "@/globalComponents/inputGroup/input-group.component";
 import { Form, Formik, FormikHelpers, useFormik } from "formik";
+import * as Yup from "yup";
 import Link from "next/link";
 import { useState } from "react";
 import {
@@ -16,6 +17,9 @@ import styles from "../auth.module.css";
 import { BiLockAlt } from "react-icons/bi";
 import FormWrapper from "@/components/auth/component/formWrapper";
 import FormHead from "@/components/auth/component/formHead";
+import { signUpThunk } from "@/slice/userSlices";
+import { useDispatch } from "store/store";
+import CustomErrorTag from "@/globalComponents/errors";
 interface Values {
   email: string;
   name: string;
@@ -37,8 +41,21 @@ const BUTTON_CONTENT = [
   },
 ];
 
+const SignupSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  password: Yup.string()
+    .min(6, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  email: Yup.string().email("Invalid email").required("Required"),
+});
+
 export default function SignUpForm() {
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -47,12 +64,14 @@ export default function SignUpForm() {
       dob: new Date().toLocaleDateString(),
       gender: "male",
     },
-    onSubmit: (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        setSubmitting(false);
-      }, 500);
+    onSubmit: async (
+      values: Values,
+      { setSubmitting }: FormikHelpers<Values>
+    ) => {
+      console.log("values: ", values);
+      dispatch(signUpThunk(values));
     },
+    validationSchema: SignupSchema,
   });
   const togglePasswordVisibility = () =>
     setIsVisiblePassword(!isVisiblePassword);
@@ -67,6 +86,8 @@ export default function SignUpForm() {
       </span>
     );
   };
+
+  const { touched, errors } = formik;
   return (
     <FormWrapper>
       <FormHead
@@ -101,6 +122,9 @@ export default function SignUpForm() {
             value={formik.values.email}
             type="email"
           />
+          <CustomErrorTag>
+            {errors.email && touched.email ? errors.email : null}
+          </CustomErrorTag>
           <InputGroup
             symbol={<BsFillPersonFill />}
             className="mb-3"
@@ -112,6 +136,9 @@ export default function SignUpForm() {
             value={formik.values.name}
             type="text"
           />
+          <CustomErrorTag>
+            {errors.name && touched.name ? errors.name : null}
+          </CustomErrorTag>
           <InputGroup
             symbol={<BiLockAlt />}
             className="mb-3"
@@ -123,60 +150,65 @@ export default function SignUpForm() {
             type={isVisiblePassword ? "text" : "password"}
             afterSymbol={afterSymbol()}
           />
-          <div className="mb-3 d-inline-flex  justify-content-between">
-            <div className="w-50 mr-1">
-              <input
-                className="form-control w-100"
-                id="dob"
-                name="dob"
-                placeholder="Date of birth"
-                type="date"
-                value={formik.values.dob}
-                onChange={formik.handleChange}
-              />
-            </div>
-            <div className="form-control ms-1 w-50 d-flex justify-content-around">
-              <span
-                className={`${styles.auth_box_form_input_icon} input-group-text`}
-              >
-                {formik.values.gender === "male" ? (
-                  <CgGenderMale />
-                ) : (
-                  <CgGenderFemale />
-                )}
-              </span>
-              <div className="pt-2 w-100 d-flex">
-                <div className="w-100 d-flex justify-content-around">
-                  <input
-                    className="form-check-input"
-                    id="male"
-                    name="gender"
-                    value="male"
-                    type="radio"
-                    onClick={formik.handleChange}
-                    checked={formik.values.gender === "male"}
-                  />
-                  <label className="form-check-label" htmlFor="male">
-                    Male
-                  </label>
-                </div>
-                <div className="w-100 d-flex justify-content-around">
-                  <input
-                    className="form-check-input"
-                    id="female"
-                    name="gender"
-                    value="female"
-                    type="radio"
-                    onClick={formik.handleChange}
-                    checked={formik.values.gender === "female"}
-                  />
-                  <label className="form-check-label" htmlFor="female">
-                    Female
-                  </label>
+          <CustomErrorTag>
+            {errors.password && touched.password ? errors.password : null}
+          </CustomErrorTag>
+          {process.env.NODE_ENV === "development" ? (
+            <div className="mb-3 d-inline-flex  justify-content-between">
+              <div className="w-50 mr-1">
+                <input
+                  className="form-control w-100"
+                  id="dob"
+                  name="dob"
+                  placeholder="Date of birth"
+                  type="date"
+                  value={formik.values.dob}
+                  onChange={formik.handleChange}
+                />
+              </div>
+              <div className="form-control ms-1 w-50 d-flex justify-content-around">
+                <span
+                  className={`${styles.auth_box_form_input_icon} input-group-text`}
+                >
+                  {formik.values.gender === "male" ? (
+                    <CgGenderMale />
+                  ) : (
+                    <CgGenderFemale />
+                  )}
+                </span>
+                <div className="pt-2 w-100 d-flex">
+                  <div className="w-100 d-flex justify-content-around">
+                    <input
+                      className="form-check-input"
+                      id="male"
+                      name="gender"
+                      value="male"
+                      type="radio"
+                      onChange={formik.handleChange}
+                      checked={formik.values.gender === "male"}
+                    />
+                    <label className="form-check-label" htmlFor="male">
+                      Male
+                    </label>
+                  </div>
+                  <div className="w-100 d-flex justify-content-around">
+                    <input
+                      className="form-check-input"
+                      id="female"
+                      name="gender"
+                      value="female"
+                      type="radio"
+                      onChange={formik.handleChange}
+                      checked={formik.values.gender === "female"}
+                    />
+                    <label className="form-check-label" htmlFor="female">
+                      Female
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          ) : null}
 
           <button type="submit" className="btn btn-primary w-100 rounded-5">
             Sign Up
