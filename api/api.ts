@@ -1,4 +1,9 @@
-import { TokenStorage } from "@/helpers/persistStorageHelper";
+import {
+  AccessToken,
+  ACCESS_TOKEN,
+  RefreshToken,
+  REFRESH_TOKEN,
+} from "@/helpers/persistStorageHelper";
 import { AxiosAuthRefreshRequestConfig } from "axios-auth-refresh";
 import axios, { AxiosError } from "axios";
 import QueryString from "qs";
@@ -19,11 +24,19 @@ axiosInstance.interceptors.request.use(
   async (config) => {
     // ignore the token reload request
     if (config.url !== "sessions/refresh") {
-      const token = TokenStorage.load();
-      if (token) {
+      const accessToken = AccessToken.load();
+      const refreshToken = RefreshToken.load();
+      console.log({ accessToken, refreshToken });
+      if (accessToken) {
         config.headers = {
           ...config.headers,
-          Authorization: token,
+          Authorization: `Bearer ${accessToken}`,
+        };
+      }
+      if (refreshToken) {
+        config.headers = {
+          ...config.headers,
+          "x-refresh": `Bearer ${refreshToken}`,
         };
       }
     }
@@ -37,6 +50,12 @@ export const request = async <T>(
 ): Promise<SuccessResult<T> | ErrorResult> => {
   try {
     const response = await axiosInstance.request<T>({ ...config });
+    if (response.headers.accesstoken) {
+      localStorage.setItem(ACCESS_TOKEN, response.headers.accesstoken);
+    }
+    if (response.headers.refreshtoken) {
+      localStorage.setItem(REFRESH_TOKEN, response.headers.accesstoken);
+    }
     return {
       remote: "success",
       data: response.data,

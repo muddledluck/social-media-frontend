@@ -20,6 +20,7 @@ import FormHead from "@/components/auth/component/formHead";
 import { signUpThunk } from "@/slice/userSlices";
 import { useDispatch } from "store/store";
 import CustomErrorTag from "@/globalComponents/errors";
+import { isDeveloperEnvironment } from "@/utils/serverUrl";
 interface Values {
   email: string;
   name: string;
@@ -68,7 +69,6 @@ export default function SignUpForm() {
       values: Values,
       { setSubmitting }: FormikHelpers<Values>
     ) => {
-      console.log("values: ", values);
       dispatch(signUpThunk(values));
     },
     validationSchema: SignupSchema,
@@ -94,18 +94,22 @@ export default function SignUpForm() {
         title="Getting Started"
         subTitle="Create an account to continue and connect with the people."
       />
-      <div className={styles.auth_box_button}>
-        {BUTTON_CONTENT.map((content) => {
-          return (
-            <LightButton key={content.key} className="m-1  w-100">
-              <span>{content.symbol}</span> {content.title}
-            </LightButton>
-          );
-        })}
-      </div>
-      <div className={styles.auth_box_divider}>
-        <span>OR</span>
-      </div>
+      {isDeveloperEnvironment ? (
+        <>
+          <div className={styles.auth_box_button}>
+            {BUTTON_CONTENT.map((content) => {
+              return (
+                <LightButton key={content.key} className="m-1  w-100">
+                  <span>{content.symbol}</span> {content.title}
+                </LightButton>
+              );
+            })}
+          </div>
+          <div className={styles.auth_box_divider}>
+            <span>OR</span>
+          </div>
+        </>
+      ) : null}
       <Formik
         initialValues={formik.initialValues}
         onSubmit={() => formik.handleSubmit()}
@@ -153,7 +157,7 @@ export default function SignUpForm() {
           <CustomErrorTag>
             {errors.password && touched.password ? errors.password : null}
           </CustomErrorTag>
-          {process.env.NODE_ENV === "development" ? (
+          {isDeveloperEnvironment ? (
             <div className="mb-3 d-inline-flex  justify-content-between">
               <div className="w-50 mr-1">
                 <input

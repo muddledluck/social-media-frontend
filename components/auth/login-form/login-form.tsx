@@ -1,6 +1,7 @@
 import LightButton from "@/globalComponents/buttons/light-button.component";
 import InputGroup from "@/globalComponents/inputGroup/input-group.component";
 import { Form, Formik, FormikHelpers, useFormik } from "formik";
+import * as Yup from "yup";
 import Link from "next/link";
 import {
   AiOutlineGoogle,
@@ -14,6 +15,10 @@ import styles from "../auth.module.css";
 import { useState } from "react";
 import FormWrapper from "@/components/auth/component/formWrapper";
 import FormHead from "@/components/auth/component/formHead";
+import { isDeveloperEnvironment } from "@/utils/serverUrl";
+import CustomErrorTag from "@/globalComponents/errors";
+import { useDispatch } from "store/store";
+import { signInThunk } from "@/slice/userSlices";
 interface Values {
   email: string;
   password: string;
@@ -31,9 +36,17 @@ const BUTTON_CONTENT = [
     symbol: <AiFillApple />,
   },
 ];
+const SigninSchema = Yup.object().shape({
+  password: Yup.string()
+    .min(6, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  email: Yup.string().email("Invalid email").required("Required"),
+});
 
 export default function LoginForm() {
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -41,10 +54,10 @@ export default function LoginForm() {
     },
     onSubmit: (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
       setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        setSubmitting(false);
+        dispatch(signInThunk(values));
       }, 500);
     },
+    validationSchema: SigninSchema,
   });
   const togglePasswordVisibility = () =>
     setIsVisiblePassword(!isVisiblePassword);
@@ -59,22 +72,27 @@ export default function LoginForm() {
       </span>
     );
   };
+  const { touched, errors } = formik;
 
   return (
     <FormWrapper>
       <FormHead title="Sign In" subTitle="Welcome back, you've been missed!" />
-      <div className={styles.auth_box_button}>
-        {BUTTON_CONTENT.map((content) => {
-          return (
-            <LightButton key={content.key} className="m-1  w-100">
-              <span>{content.symbol}</span> {content.title}
-            </LightButton>
-          );
-        })}
-      </div>
-      <div className={styles.auth_box_divider}>
-        <span>OR</span>
-      </div>
+      {isDeveloperEnvironment ? (
+        <>
+          <div className={styles.auth_box_button}>
+            {BUTTON_CONTENT.map((content) => {
+              return (
+                <LightButton key={content.key} className="m-1  w-100">
+                  <span>{content.symbol}</span> {content.title}
+                </LightButton>
+              );
+            })}
+          </div>
+          <div className={styles.auth_box_divider}>
+            <span>OR</span>
+          </div>
+        </>
+      ) : null}
       <Formik
         initialValues={formik.initialValues}
         onSubmit={() => formik.handleSubmit()}
@@ -91,6 +109,9 @@ export default function LoginForm() {
             value={formik.values.email}
             type="email"
           />
+          <CustomErrorTag>
+            {errors.email && touched.email ? errors.email : null}
+          </CustomErrorTag>
           <InputGroup
             symbol={<BiLockAlt />}
             className="mb-3"
@@ -102,7 +123,9 @@ export default function LoginForm() {
             type={isVisiblePassword ? "text" : "password"}
             afterSymbol={afterSymbol()}
           />
-
+          <CustomErrorTag>
+            {errors.password && touched.password ? errors.password : null}
+          </CustomErrorTag>
           <div className={styles.auth_box_form_footer}>
             <span>
               <input type="checkbox" /> Remember Me

@@ -1,3 +1,4 @@
+import { AccessToken, RefreshToken } from "@/helpers/persistStorageHelper";
 import { NextComponentType, NextPageContext } from "next";
 import Router from "next/router";
 import React from "react";
@@ -20,7 +21,8 @@ const redirectBasedOnLogin = async (
   route: string,
   redirectIfAuthed: boolean
 ): Promise<boolean> => {
-  const isLoggedIn = await Promise.resolve(false); //!TODO: verify user token
+  const isLoggedIn =
+    (await AccessToken.isStored()) && (await RefreshToken.isStored()); //!TODO: verify user token
   const shouldRedirect = redirectIfAuthed ? isLoggedIn : !isLoggedIn;
   if (shouldRedirect) {
     if (ctx.res) {
@@ -60,6 +62,15 @@ const withAuthRedirect =
           return Page.getInitialProps(ctx);
         }
         return { props: [] };
+      }
+      // client side check
+      async componentDidMount() {
+        const isLoggedIn =
+          (await AccessToken.isStored()) && (await RefreshToken.isStored());
+        const shouldRedirect = redirectIfAuthed ? isLoggedIn : !isLoggedIn;
+        if (shouldRedirect) {
+          Router.push(route);
+        }
       }
       render() {
         return <Page {...this.props} />;

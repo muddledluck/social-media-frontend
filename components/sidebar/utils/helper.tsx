@@ -6,8 +6,9 @@ import { MdOutlineWidgets } from "react-icons/md";
 interface NavbarItemInterface {
   key: string;
   title: string;
-  path: string;
+  path?: string;
   icon: React.ReactNode;
+  onClick?: Function;
 }
 export const NAVBAR_ITEMS: NavbarItemInterface[] = [
   {
@@ -55,7 +56,6 @@ export const NAVBAR_ITEMS: NavbarItemInterface[] = [
   {
     key: "logout",
     title: "Logout",
-    path: "/logout",
     icon: <BiLogOut />,
   },
 ];

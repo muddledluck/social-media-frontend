@@ -1,9 +1,12 @@
 type Serializer<T> = {
   store: (obj: T) => void;
-  load: () => T | null;
+  load: () => string | null;
   remove: () => void;
   isStored: () => boolean;
 };
+
+export const ACCESS_TOKEN = "accessToken";
+export const REFRESH_TOKEN = "refreshToken";
 
 function createSerializer<T>(key: string): Serializer<T> {
   if (typeof window !== "undefined") {
@@ -11,7 +14,7 @@ function createSerializer<T>(key: string): Serializer<T> {
     const storage = localStorage;
     // 👉️ can use localStorage here
     const storeFn = (item: T) => storage.setItem(key, JSON.stringify(item));
-    const removeFn = () => storage.remoteItem(key);
+    const removeFn = () => storage.removeItem(key);
     const existsFn = () => {
       const keys = Object.keys(storage);
       return keys.includes(key);
@@ -19,7 +22,7 @@ function createSerializer<T>(key: string): Serializer<T> {
     const loadFn = () => {
       const result = storage.getItem(key);
       try {
-        return result === null ? null : (JSON.parse(result) as T);
+        return result;
       } catch (error) {
         return null;
       }
@@ -53,4 +56,5 @@ export const clearLocalStorage = () => {
   }
 };
 
-export const TokenStorage = createSerializer<string>("ca_auth_token");
+export const AccessToken = createSerializer<string>(ACCESS_TOKEN);
+export const RefreshToken = createSerializer<string>(REFRESH_TOKEN);

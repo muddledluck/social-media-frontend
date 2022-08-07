@@ -25,4 +25,5 @@ export type User = {
   email: string;
   profileImage?: string;
   name: string;
+  createdAt?: string;
 };
