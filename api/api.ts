@@ -7,6 +7,7 @@ import {
 import { AxiosAuthRefreshRequestConfig } from "axios-auth-refresh";
 import axios, { AxiosError } from "axios";
 import QueryString from "qs";
+import { setCookie } from "cookies-next";
 import { SuccessResult, ErrorResult, ServerError } from "@/types/types";
 import { SERVER_URL } from "@/utils/serverUrl";
 export const axiosInstance = axios.create({
@@ -26,7 +27,6 @@ axiosInstance.interceptors.request.use(
     if (config.url !== "sessions/refresh") {
       const accessToken = AccessToken.load();
       const refreshToken = RefreshToken.load();
-      console.log({ accessToken, refreshToken });
       if (accessToken) {
         config.headers = {
           ...config.headers,
@@ -51,10 +51,10 @@ export const request = async <T>(
   try {
     const response = await axiosInstance.request<T>({ ...config });
     if (response.headers.accesstoken) {
-      localStorage.setItem(ACCESS_TOKEN, response.headers.accesstoken);
+      setCookie(ACCESS_TOKEN, response.headers.accesstoken);
     }
     if (response.headers.refreshtoken) {
-      localStorage.setItem(REFRESH_TOKEN, response.headers.accesstoken);
+      setCookie(REFRESH_TOKEN, response.headers.refreshtoken);
     }
     return {
       remote: "success",

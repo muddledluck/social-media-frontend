@@ -8,32 +8,36 @@ import {
   updateIsLoggedInStatus,
 } from "@/slice/userSlices";
 import styles from "./layout.module.css";
+import { hasCookie } from "cookies-next";
+import Router from "next/router";
 interface LayoutInterface {
   children: React.ReactNode | React.ReactNode[];
 }
 
 const Layout: React.FC<LayoutInterface> = ({ children }) => {
   const dispatch = useDispatch();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const isLoggedInStatus = useSelector((state) => state.user.isLoggedIn);
+  const accessToken = hasCookie("accessToken");
+  const refreshToken = hasCookie("refreshToken");
   useEffect(() => {
     // Perform localStorage action
-    const item = AccessToken.isStored() && RefreshToken.isStored();
-    setIsLoggedIn(item);
+    const item = !!accessToken && !!refreshToken;
     dispatch(updateIsLoggedInStatus(item));
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [AccessToken.isStored(), RefreshToken.isStored(), isLoggedIn]);
+  }, [accessToken, dispatch, refreshToken]);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedInStatus) {
       dispatch(getUserDetailsThunk());
+      Router.push("/");
+    } else {
+      Router.push("/sign-in");
     }
-  }, [dispatch, isLoggedIn]);
+  }, [dispatch, isLoggedInStatus]);
   return (
     <>
-      <Navbar isLoggedIn={isLoggedIn} />
-      {isLoggedIn && <Sidebar />}
+      <Navbar isLoggedIn={isLoggedInStatus} />
+      {isLoggedInStatus && <Sidebar />}
       <div className={styles.customContainer}>{children}</div>
     </>
   );

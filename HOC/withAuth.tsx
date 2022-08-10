@@ -1,7 +1,7 @@
-import { AccessToken, RefreshToken } from "@/helpers/persistStorageHelper";
 import { NextComponentType, NextPageContext } from "next";
 import Router from "next/router";
 import React from "react";
+import { hasCookie } from "cookies-next";
 
 /**
  * Reference: https://louisrli.github.io/blog/2019/11/17/auth-redirect-next-js/#.YuUg03ZByHt
@@ -21,8 +21,11 @@ const redirectBasedOnLogin = async (
   route: string,
   redirectIfAuthed: boolean
 ): Promise<boolean> => {
-  const isLoggedIn =
-    (await AccessToken.isStored()) && (await RefreshToken.isStored()); //!TODO: verify user token
+  let accessToken = hasCookie("accessToken");
+  let refreshToken = hasCookie("refreshToken");
+  // accessToken = ctx.req.cookies["accessToken"];
+  // refreshToken = ctx.req.cookies["refreshToken"];
+  const isLoggedIn = accessToken && refreshToken; //!TODO: verify user token
   const shouldRedirect = redirectIfAuthed ? isLoggedIn : !isLoggedIn;
   if (shouldRedirect) {
     if (ctx.res) {
@@ -64,14 +67,14 @@ const withAuthRedirect =
         return { props: [] };
       }
       // client side check
-      async componentDidMount() {
-        const isLoggedIn =
-          (await AccessToken.isStored()) && (await RefreshToken.isStored());
-        const shouldRedirect = redirectIfAuthed ? isLoggedIn : !isLoggedIn;
-        if (shouldRedirect) {
-          Router.push(route);
-        }
-      }
+      // async componentDidMount() {
+      //   const isLoggedIn =
+      //     (await AccessToken.isStored()) && (await RefreshToken.isStored());
+      //   const shouldRedirect = redirectIfAuthed ? isLoggedIn : !isLoggedIn;
+      //   if (shouldRedirect) {
+      //     Router.push(route);
+      //   }
+      // }
       render() {
         return <Page {...this.props} />;
       }

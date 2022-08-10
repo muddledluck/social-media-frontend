@@ -1,5 +1,6 @@
 import { NAVBAR_ITEMS } from "@/components/sidebar/utils/helper";
 import { updateIsLoggedInStatus } from "@/slice/userSlices";
+import { deleteCookie } from "cookies-next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch } from "store/store";
@@ -9,7 +10,10 @@ export default function Sidebar() {
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(updateIsLoggedInStatus(false));
-    router.push("/sign-in");
+    deleteCookie("accessToken");
+    deleteCookie("refreshToken");
+    // window.location.reload();
+
   };
   return (
     <div className={styles.sidebar}>
@@ -28,7 +32,7 @@ export default function Sidebar() {
               className={router.asPath === item.path ? styles.active : ""}
               onClick={() => handleLogout()}
             >
-              <span>{item.icon}</span> {item.title}
+              <span>{item.icon}</span> {item.title} teasteas
             </a>
           );
         }

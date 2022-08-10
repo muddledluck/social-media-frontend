@@ -62,6 +62,7 @@ export const signInThunk = createAsyncThunk<
   { state: RootState; rejectValue: ServerError }
 >("user/signIn", async (request, { rejectWithValue, dispatch }) => {
   const response: SuccessResult<string> | ErrorResult = await signIn(request);
+  console.log({ response });
   if (response.remote === "success") {
     const { data } = response;
     return data;
@@ -110,6 +111,7 @@ export const userSlice = createSlice({
       state.alertMessage = action.payload;
     });
     builder.addMatcher(isAnyOf(signInThunk.fulfilled), (state, action) => {
+      console.log("fullfilled loging");
       state.isLoggedIn = true;
     });
     builder.addMatcher(
