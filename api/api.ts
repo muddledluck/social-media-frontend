@@ -7,7 +7,7 @@ import {
 import { AxiosAuthRefreshRequestConfig } from "axios-auth-refresh";
 import axios, { AxiosError } from "axios";
 import QueryString from "qs";
-import { setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 import { SuccessResult, ErrorResult, ServerError } from "@/types/types";
 import { SERVER_URL } from "@/utils/serverUrl";
 export const axiosInstance = axios.create({
@@ -25,8 +25,8 @@ axiosInstance.interceptors.request.use(
   async (config) => {
     // ignore the token reload request
     if (config.url !== "sessions/refresh") {
-      const accessToken = AccessToken.load();
-      const refreshToken = RefreshToken.load();
+      const accessToken = getCookie(ACCESS_TOKEN);
+      const refreshToken = getCookie(REFRESH_TOKEN);
       if (accessToken) {
         config.headers = {
           ...config.headers,
