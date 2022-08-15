@@ -39,6 +39,7 @@
   font-weight: 500;
   color: #4e5d78;
   font-size: medium;
+  cursor: pointer;
 }
 
 .commentsSend {

@@ -25,9 +25,11 @@ const {
 const postActions = ({
   isLiked,
   onLike,
+  toggleLikeLoading,
 }: {
   isLiked: boolean;
   onLike: () => any;
+  toggleLikeLoading: boolean;
 }): PostActionInterface[] => [
   {
     key: "like",
@@ -35,6 +37,7 @@ const postActions = ({
     icon: isLiked ? <LikeFill /> : <LikeOutline />,
     isVisible: true,
     onClick: onLike,
+    disabled: toggleLikeLoading,
   },
   {
     key: "comments",
@@ -77,11 +80,9 @@ export default function Post({
 }: PostInterface) {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
+  const { toggleLikeLoading } = useSelector((state) => state.post);
 
-  const handleToggleLike = () => {
-    dispatch(toggleLikePostThunk(id));
-    console.log("Liked");
-  };
+  const handleToggleLike = () => dispatch(toggleLikePostThunk(id));
   return (
     <div className={`p-3 rounded-3 ${styles.post}`}>
       <div className={`d-flex justify-content-between ${styles.post_head}`}>
@@ -110,13 +111,17 @@ export default function Post({
       <div>
         <HorizontalDivider />
         <div className="d-flex justify-content-between align-items-center">
-          {postActions({ isLiked, onLike: handleToggleLike }).map((action) => (
+          {postActions({
+            isLiked,
+            onLike: handleToggleLike,
+            toggleLikeLoading,
+          }).map((action) => (
             <div
               className={styles.postAction}
               key={action.key}
               style={{ display: action.isVisible ? "block" : "none" }}
               onClick={() => {
-                action.onClick ? action.onClick() : null;
+                if (!action.disabled && action.onClick) action.onClick();
               }}
             >
               <span>{action.icon}</span> <span>{action.title}</span>

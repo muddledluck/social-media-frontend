@@ -10,6 +10,7 @@ type PostActionInterface = {
   icon: React.ReactNode | React.ReactNode[];
   isVisible: boolean;
   onClick?: () => any;
+  disabled?: boolean;
 };
 
 type SymbolsType = {

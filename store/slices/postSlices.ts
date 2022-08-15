@@ -20,6 +20,7 @@ interface InitialStateInterface {
   creatingPost: boolean;
   errorCreatingPost: any;
   fetchingData: boolean;
+  toggleLikeLoading: boolean;
 }
 
 /**
@@ -31,6 +32,7 @@ const initialState: InitialStateInterface = {
   creatingPost: false,
   errorCreatingPost: null,
   fetchingData: false,
+  toggleLikeLoading: false,
 };
 
 export const createPostThunk = createAsyncThunk<
@@ -135,6 +137,19 @@ export const postSlice = createSlice({
           });
         }
         state.feed = newPost;
+        state.toggleLikeLoading = false;
+      }
+    );
+    builder.addMatcher(
+      isAnyOf(toggleLikePostThunk.pending),
+      (state, action) => {
+        state.toggleLikeLoading = true;
+      }
+    );
+    builder.addMatcher(
+      isAnyOf(toggleLikePostThunk.rejected),
+      (state, action) => {
+        state.toggleLikeLoading = false;
       }
     );
   },
