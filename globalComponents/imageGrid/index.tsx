@@ -1,8 +1,9 @@
+import { Attachment } from "@/types/types";
 import Image from "next/image";
 import { useState } from "react";
 import styles from "./styles.module.css";
 interface ImageGridProps {
-  images: string[];
+  images: Attachment[];
 }
 type ImageSizeType = {
   width: number;
@@ -20,14 +21,14 @@ const ImageGrid: React.FC<ImageGridProps> = ({ images }) => {
         {images[0] &&
           [images[0]].map((image) => (
             <div
-              key={image}
+              key={image.id}
               className={`overflow-hidden rounded ${styles.image}`}
             >
               <Image
                 width={imgSize.width}
                 height={imgSize.width}
-                src={image}
-                alt={image}
+                src={image.path}
+                alt={image.type}
               />
             </div>
           ))}

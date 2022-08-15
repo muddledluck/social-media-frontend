@@ -12,7 +12,11 @@ export default function Birthday() {
         subName={"Birthday today"}
       />
       <div className="d-flex justify-content-between align-items-center">
-        <ProfileInput placeholder="Write on his inbox" />
+        <ProfileInput
+          placeholder="Write on his inbox"
+          onChange={(e) => console.log(e.target.value)}
+          value={""}
+        />
         <div className={`mb-3 ms-3`}>
           <SendOutline />
         </div>

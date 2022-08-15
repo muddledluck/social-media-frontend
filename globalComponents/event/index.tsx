@@ -1,4 +1,5 @@
 import AvatarGroup from "@/globalComponents/avatarGroup";
+import { Vote } from "@/types/types";
 import IMAGES from "assets/images";
 import Image, { StaticImageData } from "next/image";
 import { useEffect, useState } from "react";
@@ -8,7 +9,7 @@ interface EventInterface {
   content: string;
   image?: StaticImageData;
   title: string;
-  seen: likeType[];
+  seen?: Vote[];
 }
 
 const Event: React.FC<EventInterface> = ({ content, image, title, seen }) => {
@@ -32,13 +33,13 @@ const Event: React.FC<EventInterface> = ({ content, image, title, seen }) => {
           <p className={`${styles.content}`}>{_content}</p>
         </div>
       </div>
-      <div className={`d-flex justify-content-between align-items-center`}>
+      {/* <div className={`d-flex justify-content-between align-items-center`}>
         <span>{seen.length} seen</span>
         <span>
           {" "}
-          <AvatarGroup users={seen} />
+          <AvatarGroup votes={seen} />
         </span>
-      </div>
+      </div> */}
     </div>
   );
 };

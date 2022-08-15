@@ -7,6 +7,13 @@
   color: rgb(97, 97, 97);
 }
 
+.post_content {
+  color: #7e7d7d;
+  font-weight: 600;
+  margin-bottom: 15px;
+  white-space: pre-wrap;
+}
+
 .image_grid {
   height: 500px;
 }
@@ -20,6 +27,7 @@
 .avatarGroup {
   color: gray;
   font-weight: 500;
+  height: 38px;
 }
 .avatarGroup div {
   display: flex;

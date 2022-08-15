@@ -2,6 +2,7 @@ import { VscDeviceCameraVideo } from "react-icons/vsc";
 import { MdOutlineInsertPhoto } from "react-icons/md";
 import { RiUserSmileLine } from "react-icons/ri";
 import {
+  AiFillLike,
   AiOutlineComment,
   AiOutlineFileGif,
   AiOutlineFileImage,
@@ -15,6 +16,7 @@ const ICONS = {
   InsertPhoto: MdOutlineInsertPhoto,
   SmileLine: RiUserSmileLine,
   LikeOutline: AiOutlineLike,
+  LikeFill: AiFillLike,
   CommentOutline: AiOutlineComment,
   ShareAltOutline: AiOutlineShareAlt,
   GifFileOutline: AiOutlineFileGif,

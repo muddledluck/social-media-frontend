@@ -1,15 +1,25 @@
-import { randomAvatar } from "@/utils/generateFakeData";
+import { Vote } from "@/types/types";
+import { generateRandomAvatar } from "@/utils/generateFakeData";
 import { Avatar, Tooltip } from "antd";
 
 interface AvatarGroupInterface {
-  users: likeType[];
+  votes: Vote[];
 }
 
-const AvatarGroup: React.FC<AvatarGroupInterface> = ({ users }) => {
+const AvatarGroup: React.FC<AvatarGroupInterface> = ({ votes }) => {
   return (
     <Avatar.Group maxCount={4}>
-      {users.map((user) => {
-        return <Avatar src={user.profileImage} alt={user.name} key={user.id} />;
+      {votes.map((vote) => {
+        return (
+          <Avatar
+            src={
+              vote.user.profileImage ||
+              generateRandomAvatar(vote.user.id, vote.user.name)
+            }
+            alt={vote.user.name}
+            key={vote.id}
+          />
+        );
       })}
     </Avatar.Group>
   );

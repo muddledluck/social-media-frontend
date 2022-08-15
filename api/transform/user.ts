@@ -1,3 +1,5 @@
+import { generateRandomAvatar } from "@/utils/generateFakeData";
+
 export type SignUpRequestData = {
   email: string;
   password: string;
@@ -23,7 +25,21 @@ export type UserSessionResponse = {
 export type User = {
   id: string;
   email: string;
-  profileImage?: string;
+  profileImage: string;
   name: string;
   createdAt?: string;
+};
+
+export const transformSessionDetailsResponse = (
+  data: UserSessionResponse
+): UserSessionResponse => {
+  return {
+    ...data,
+    user: {
+      ...data.user,
+      profileImage: data.user.profileImage
+        ? data.user.profileImage
+        : generateRandomAvatar(data.user.id, data.user.name),
+    },
+  };
 };

@@ -4,15 +4,12 @@ type likeType = {
   id: number;
 };
 
-type postType = {
-  content: string;
-  images: string[];
-};
-
 type PostActionInterface = {
   key: string;
   title: string;
   icon: React.ReactNode | React.ReactNode[];
+  isVisible: boolean;
+  onClick?: () => any;
 };
 
 type SymbolsType = {

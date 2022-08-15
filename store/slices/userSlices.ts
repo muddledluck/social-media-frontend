@@ -111,7 +111,6 @@ export const userSlice = createSlice({
       state.alertMessage = action.payload;
     });
     builder.addMatcher(isAnyOf(signInThunk.fulfilled), (state, action) => {
-      console.log("fullfilled loging");
       state.isLoggedIn = true;
     });
     builder.addMatcher(

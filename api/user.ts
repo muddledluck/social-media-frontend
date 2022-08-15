@@ -4,6 +4,7 @@ import api from "api/api";
 import {
   SignInRequestData,
   SignUpRequestData,
+  transformSessionDetailsResponse,
   UserDataResponse,
   UserSessionResponse,
 } from "api/transform/user";
@@ -55,7 +56,7 @@ export const getSessionDetails = async (): Promise<
   if (response.remote === "success") {
     return {
       remote: "success",
-      data: response.data,
+      data: transformSessionDetailsResponse(response.data),
     };
   }
   return response;

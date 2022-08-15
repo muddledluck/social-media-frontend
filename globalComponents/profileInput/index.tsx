@@ -1,15 +1,20 @@
 import Image from "next/image";
+import { ChangeEvent } from "react";
 import styles from "./styles.module.css";
 
 interface ProfileInputInterface {
   symbols?: SymbolsType[];
   placeholder?: string;
   profileImage?: string;
+  onChange: (e: ChangeEvent<any>) => any;
+  value: string;
 }
 const ProfileInput: React.FC<ProfileInputInterface> = ({
   symbols,
   placeholder,
   profileImage,
+  onChange,
+  value,
 }) => {
   return (
     <div className="d-flex justify-content-center align-items-center mb-3 w-100">
@@ -26,9 +31,11 @@ const ProfileInput: React.FC<ProfileInputInterface> = ({
       ) : (
         ""
       )}
-      <input
+      <textarea
         placeholder={placeholder ? placeholder : ""}
         className={`form-control ${styles.textarea}`}
+        onChange={onChange}
+        value={value}
       />
       {symbols?.map((symbol, idx) => {
         return (

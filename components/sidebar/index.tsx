@@ -13,7 +13,6 @@ export default function Sidebar() {
     deleteCookie("accessToken");
     deleteCookie("refreshToken");
     // window.location.reload();
-
   };
   return (
     <div className={styles.sidebar}>
@@ -31,8 +30,9 @@ export default function Sidebar() {
             <a
               className={router.asPath === item.path ? styles.active : ""}
               onClick={() => handleLogout()}
+              key={item.key}
             >
-              <span>{item.icon}</span> {item.title} teasteas
+              <span>{item.icon}</span> {item.title}
             </a>
           );
         }

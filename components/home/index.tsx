@@ -3,40 +3,36 @@
 import { CreatePostComponent, PostComponent } from "@/components/post";
 import { SuggestedUserComponent } from "@/components/users";
 import CustomCard from "@/globalComponents/customCard";
-import { setPost } from "@/slice/postSlices";
 import { setSuggestedUser } from "@/slice/userSlices";
 import {
-  generateRandomPostData,
   generateRandomSuggestedUser,
-  randomAvatar,
   randomLorem,
-  randomName,
 } from "@/utils/generateFakeData";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "store/store";
 import ICONS from "@/globalComponents/icons";
 import Event from "@/globalComponents/event";
 import Birthday from "@/components/users/components/birthday/birthday";
+import { getFeedPostThunk } from "@/slice/postSlices";
 
 const { HorizontalThreeDots } = ICONS;
 
 const event = {
   content: randomLorem(5),
   title: "Graduation Ceremony",
-  seen: [
-    { id: 1, name: randomName(), profileImage: randomAvatar() },
-    { id: 2, name: randomName(), profileImage: randomAvatar() },
-  ],
+  // seen: [
+  //   { id: 1, name: randomName(), profileImage: randomAvatar() },
+  //   { id: 2, name: randomName(), profileImage: randomAvatar() },
+  // ],
 };
 
 export default function HomePage() {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.post);
+  const posts = useSelector((state) => state.post.feed);
+  console.log({ posts });
   const { suggestedUser } = useSelector((state) => state.user);
   useEffect(() => {
-    // generate 2 random post
-    const newPosts = [1, 2].map(() => generateRandomPostData());
-    dispatch(setPost(newPosts));
+    dispatch(getFeedPostThunk());
 
     const newSuggestedUser = [1].map(() => generateRandomSuggestedUser());
     dispatch(setSuggestedUser(newSuggestedUser));

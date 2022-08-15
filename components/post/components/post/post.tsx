@@ -1,5 +1,4 @@
 import ProfileCard from "@/globalComponents/profile-card/profileCard";
-import { randomAvatar } from "@/utils/generateFakeData";
 import styles from "./post.module.css";
 import TimeAgo from "@/globalComponents/timeAgo";
 import ImageGrid from "@/globalComponents/imageGrid";
@@ -7,9 +6,12 @@ import AvatarGroup from "@/globalComponents/avatarGroup";
 import HorizontalDivider from "@/globalComponents/divider";
 import ProfileInput from "@/globalComponents/profileInput";
 import ICONS from "@/globalComponents/icons";
-import { PostStateInterface } from "@/slice/postSlices";
+import { PostInterface } from "@/api/transform/post";
+import { useDispatch, useSelector } from "store/store";
+import { toggleLikePostThunk } from "@/slice/postSlices";
 
 const {
+  LikeFill,
   LikeOutline,
   CommentOutline,
   ShareAltOutline,
@@ -20,21 +22,31 @@ const {
   HorizontalThreeDots,
 } = ICONS;
 
-const postActions: PostActionInterface[] = [
+const postActions = ({
+  isLiked,
+  onLike,
+}: {
+  isLiked: boolean;
+  onLike: () => any;
+}): PostActionInterface[] => [
   {
     key: "like",
     title: "Like",
-    icon: <LikeOutline />,
+    icon: isLiked ? <LikeFill /> : <LikeOutline />,
+    isVisible: true,
+    onClick: onLike,
   },
   {
     key: "comments",
     title: "Comments",
     icon: <CommentOutline />,
+    isVisible: true,
   },
   {
     key: "share",
     title: "Share",
     icon: <ShareAltOutline />,
+    isVisible: false,
   },
 ];
 
@@ -54,40 +66,59 @@ const profileInputIcons: SymbolsType[] = [
 ];
 
 export default function Post({
-  name,
-  date,
-  post,
+  id,
+  user,
+  createdAt,
+  content,
+  attachment,
   likedUsers,
-  totalShare,
   totalComments,
-}: PostStateInterface) {
+  isLiked,
+}: PostInterface) {
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.user);
+
+  const handleToggleLike = () => {
+    dispatch(toggleLikePostThunk(id));
+    console.log("Liked");
+  };
   return (
     <div className={`p-3 rounded-3 ${styles.post}`}>
       <div className={`d-flex justify-content-between ${styles.post_head}`}>
         <ProfileCard
-          imgSrc={randomAvatar()}
-          name={name}
-          subName={<TimeAgo date={date} content={"public"} />}
+          imgSrc={user.profileImage}
+          name={user.name}
+          subName={<TimeAgo date={createdAt} content={"public"} />}
         />
         <HorizontalThreeDots />
       </div>
-      <div className={styles.image_grid}>
-        <ImageGrid images={post.images} />
-      </div>
+      <div className={styles.post_content}>{content}</div>
+      {attachment.length ? (
+        <div className={styles.image_grid}>
+          <ImageGrid images={attachment} />
+        </div>
+      ) : null}
       <div
         className={`d-flex justify-content-between align-items-center ${styles.avatarGroup}`}
       >
-        <AvatarGroup users={likedUsers} />
+        <AvatarGroup votes={likedUsers} />
         <div>
-          <span>{totalComments}</span> Comments
-          <span>{totalShare}</span> Shares
+          <span>{`${totalComments} Comments`}</span>
+          {/* <span>{`${totalShare} Shares`}</span> */}
         </div>
       </div>
       <div>
         <HorizontalDivider />
         <div className="d-flex justify-content-between align-items-center">
-          {postActions.map((action) => (
-            <div className={styles.postAction} key={action.key}>
+          {postActions({ isLiked, onLike: handleToggleLike }).map((action) => (
+            <div
+              className={styles.postAction}
+              key={action.key}
+              style={{ display: action.isVisible ? "block" : "none" }}
+              onClick={() => {
+                action.onClick ? action.onClick() : null;
+              }}
+            >
               <span>{action.icon}</span> <span>{action.title}</span>
             </div>
           ))}
@@ -97,7 +128,9 @@ export default function Post({
           <ProfileInput
             placeholder="Write a comment..."
             symbols={profileInputIcons}
-            profileImage={randomAvatar()}
+            profileImage={currentUser.profileImage}
+            onChange={(e) => console.log(e.target.value)}
+            value=""
           />
           <div className={`${styles.commentsSend} mb-3 ms-3`}>
             <SendOutline />

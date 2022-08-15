@@ -1,4 +1,4 @@
-import { PostStateInterface } from "@/slice/postSlices";
+import { PostInterface } from "@/api/transform/post";
 import { SuggestedUserInterface } from "@/slice/userSlices";
 import { getPreviousDay } from "@/utils/constant";
 import { faker } from "@faker-js/faker";
@@ -40,33 +40,14 @@ const generateRandomNumber = (range: number): number => {
   return Math.round(Math.random() * range);
 };
 
-export const generateRandomPostData = (): PostStateInterface => {
-  const randomNumber = generateRandomNumber(5);
-  const randomLikedUsers = [];
-  for (let i = 0; i < randomNumber; i++) {
-    randomLikedUsers.push({
-      id: i,
-      name: randomName(),
-      profileImage: randomAvatar(),
-    });
-  }
-  return {
-    name: randomName(),
-    date: randomDateBetween(),
-    post: {
-      content: randomLorem(3),
-      images: [randomAbstract()],
-    },
-    likedUsers: randomLikedUsers,
-    totalShare: generateRandomNumber(100),
-    totalComments: generateRandomNumber(100),
-  };
-};
-
 export const generateRandomSuggestedUser = (): SuggestedUserInterface => {
   return {
     designation: randomJobTitle(),
     name: randomName(),
     profileImage: randomAvatar(),
   };
+};
+
+export const generateRandomAvatar = (id: string, name: string): string => {
+  return `https://robohash.org/${name}${id}`;
 };
