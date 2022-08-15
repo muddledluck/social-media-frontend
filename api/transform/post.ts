@@ -16,7 +16,7 @@ export type PostResponse = {
   id: string;
   content: string;
   shares: number;
-  attachment?: Attachment[];
+  Attachments?: Attachment[];
   createdAt: string;
   user: User;
   votes: Vote[];
@@ -56,7 +56,7 @@ export const transformCreatePostResponse = (
         generateRandomAvatar(data.user.id, data.user.name),
     },
     createdAt: data.createdAt,
-    attachment: data.attachment || [],
+    attachment: data.Attachments || [],
     likedUsers: data.votes,
     totalShare: data.shares,
     totalComments: data._count.comments,

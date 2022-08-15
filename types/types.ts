@@ -19,7 +19,7 @@ export type ErrorResult = {
 
 export type Attachment = {
   id: string;
-  type: "type/image" | "type/video" | "type/music" | "type/document";
+  type: string;
   path: string;
 };
 

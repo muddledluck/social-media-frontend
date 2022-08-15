@@ -1,10 +1,10 @@
 import styles from "./createPost.module.css";
 import ProfileInput from "@/globalComponents/profileInput";
 import ICONS from "@/globalComponents/icons";
-import { randomAvatar } from "@/utils/generateFakeData";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useDispatch, useSelector } from "store/store";
 import { createPostThunk } from "@/slice/postSlices";
+import file2Base64 from "@/utils/fileToBase64";
 
 const { CameraVideo, InsertPhoto, SmileLine } = ICONS;
 const postActions: PostActionInterface[] = [
@@ -35,16 +35,29 @@ export default function CreatePost() {
     (state) => state.post
   );
   const [content, setContent] = useState<string>("");
+  const [attachment, setAttachment] = useState<string[]>([]);
   const handleSubmit = () => {
     const payload = {
       content,
-      attachments: [],
+      attachments: attachment,
     };
-    console.log(payload);
     dispatch(createPostThunk(payload));
-    if (!errorCreatingPost) setContent("");
+    if (!errorCreatingPost) {
+      setContent("");
+      setAttachment([]);
+    }
     console.log({ errorCreatingPost });
   };
+
+  const handleAttachmentChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length) {
+      const file = files[0];
+      const base64 = await file2Base64(file);
+      setAttachment((prevState) => [...prevState, base64]);
+    }
+  };
+
   return (
     <div className={`p-3 rounded-3 ${styles.createPost}`}>
       <ProfileInput
@@ -62,6 +75,12 @@ export default function CreatePost() {
           >
             <span>{action.icon}</span>
             <span>{action.title}</span>
+            <input
+              type="file"
+              className={styles.fileUpload}
+              accept="image/*"
+              onChange={(e) => handleAttachmentChange(e)}
+            />
           </div>
         ))}
         <button
