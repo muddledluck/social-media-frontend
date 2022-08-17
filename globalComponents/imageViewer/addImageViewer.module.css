@@ -1,0 +1,11 @@
+.popupImageViewer {
+  display: flex;
+}
+.popupImageViewer div {
+  position: absolute;
+  /* border: dotted; */
+  z-index: 99;
+  right: 50px;
+  font-size: 25px;
+  cursor: pointer;
+}

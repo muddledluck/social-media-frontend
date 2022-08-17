@@ -40,3 +40,18 @@
 .postAction span {
   margin: 0px 2px 0px 2px;
 }
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleSubText {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  align-items: center;
+  font-weight: 400;
+  margin-right: 15px;
+}

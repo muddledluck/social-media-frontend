@@ -1,5 +1,5 @@
 import { VscDeviceCameraVideo } from "react-icons/vsc";
-import { MdOutlineInsertPhoto } from "react-icons/md";
+import { MdOutlineCancel, MdOutlineInsertPhoto } from "react-icons/md";
 import { RiUserSmileLine } from "react-icons/ri";
 import {
   AiFillLike,
@@ -23,6 +23,7 @@ const ICONS = {
   FileImageOutline: AiOutlineFileImage,
   SendOutline: AiOutlineSend,
   HorizontalThreeDots: BsThreeDots,
+  CancelCross: MdOutlineCancel,
 };
 
 export default ICONS;
