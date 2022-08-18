@@ -14,4 +14,20 @@
   .customContainer{
     margin-left: 0px;
   }
+
+  .customContainer {
+  margin-left: 0px;
+  padding: 10px;
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .customContainer{
+    margin-left: 0px;
+  }
+
+  .customContainer {
+  margin-left: 0px;
+  padding: 10px;
+  }
 }

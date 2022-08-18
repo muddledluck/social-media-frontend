@@ -1,5 +1,5 @@
 .sidebar {
-  margin: 0;
+  margin: 0px;
   padding: 0;
   width: 200px;
   background-color: white;
@@ -7,6 +7,7 @@
   height: 100%;
   overflow: auto;
   align-items: center;
+  z-index: 99;
 }
 .sidebar a {
   display: block;

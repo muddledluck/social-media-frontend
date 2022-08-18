@@ -1,7 +1,8 @@
 .navbar {
   position: sticky;
-  background-color: #eae2e2;
+  background-color: #ffffff;
   width: 100%;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -50,6 +51,14 @@
 @media screen and (max-width: 765px) {
   .md_list_icon{
     margin-left: 0px;
+  }
+
+  .navbar_dropdown{
+    display: none;
+  }
+
+  .navbar_search{
+    display: none;
   }
 }
 
