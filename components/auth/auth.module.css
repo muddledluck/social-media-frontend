@@ -69,27 +69,27 @@
 @media screen and (max-width: 1475px) {
 .auth_box {
   width: 50%;
-  background-color: rgb(209, 192, 192);
+  background-color: #fff;
 }
 }
 
 @media screen and (max-width: 991px) {
 .auth_box {
   width: 50%;
-  background-color: rgb(209, 192, 192);
+  background-color: #fff;
 }
 }
 
 @media screen and (max-width: 765px) {
 .auth_box {
   width: 80%;
-  background-color: rgb(209, 192, 192);
+  background-color: #fff;
 }
 }
 
 @media screen and (max-width: 480px) {
 .auth_box {
   width: 100%;
-  background-color: rgb(209, 192, 192);
+  background-color: #fff;
 }
 }
