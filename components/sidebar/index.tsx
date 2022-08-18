@@ -3,11 +3,13 @@ import { updateIsLoggedInStatus } from "@/slice/userSlices";
 import { deleteCookie } from "cookies-next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useDispatch } from "store/store";
+import { useDispatch, useSelector } from "store/store";
 import styles from "./sidebar.module.css";
 export default function Sidebar() {
   const router = useRouter();
   const dispatch = useDispatch();
+  const { isOpenSidebar } = useSelector((state) => state.general);
+
   const handleLogout = () => {
     dispatch(updateIsLoggedInStatus(false));
     deleteCookie("accessToken");
@@ -15,7 +17,7 @@ export default function Sidebar() {
     // window.location.reload();
   };
   return (
-    <div className={styles.sidebar}>
+    <div className={`${styles.sidebar} ${isOpenSidebar ? "d-block" : "d-lg-block d-none"} `}>
       {NAVBAR_ITEMS.map((item) => {
         if (item.path) {
           return (

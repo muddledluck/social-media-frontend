@@ -1,6 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import postSlice from "@/slice/postSlices";
 import userSlice from "@/slice/userSlices";
+import generalSlice from "@/slice/generalSlices";
+
 
 import {
   useDispatch as useDispatchBase,
@@ -11,6 +13,7 @@ export const store = configureStore({
   reducer: {
     post: postSlice,
     user: userSlice,
+    general: generalSlice
   },
 });
 
