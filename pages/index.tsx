@@ -10,7 +10,7 @@ const Home: NextPage = () => {
         <title>{PROJECT_TITLE}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <main style={{width:"100%"}}>
         <HomePage />
       </main>
     </div>

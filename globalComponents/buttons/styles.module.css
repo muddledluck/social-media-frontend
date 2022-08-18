@@ -1,9 +1,10 @@
 .light_button {
-  background-color: #fcf9f9;
+  background-color: #f4f0f0;
   border: none;
   padding: 15px 32px;
-  text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-}
+  margin: 0px !important; 
+  width: 49% !important;
+  border-radius: 6px;
+  }

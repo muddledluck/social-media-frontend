@@ -1,22 +1,33 @@
 .navbar {
-  background-color: white;
   position: sticky;
+  background-color: #ffffff;
   width: 100%;
-  height: 50px;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 200;
-  top: 0;
-  padding-top: 12px;
+  top: 0;  
 }
+
 .navbar_logo {
   font-size: 20px;
+  font-weight: 600;
+  margin-left: 10px
 }
+
+.md_list_icon{
+  margin-left: -120px;
+  font-size: 28px;
+  margin-top: -8px;
+}
+
 .navbar_search {
   width: 50%;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
+  margin-top: 6px;
 }
+
 .navbar_search_icon {
   position: absolute;
   top: 1px;
@@ -26,9 +37,7 @@
 .navbar_dropdown {
   z-index: 1000;
   float: left;
-  min-width: 160px;
-  padding: 5px 0;
-  margin: 2px 0 0;
+  padding: 2px 0;
   font-size: 14px;
   text-align: left;
   list-style: none;
@@ -36,4 +45,25 @@
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
   border-radius: 4px;
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 765px) {
+  .md_list_icon{
+    margin-left: 0px;
+  }
+
+  .navbar_dropdown{
+    display: none;
+  }
+
+  .navbar_search{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .customContainer{
+    margin-left: 0px;
+  }
 }

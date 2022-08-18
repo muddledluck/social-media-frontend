@@ -78,7 +78,7 @@ export default function SignUpForm() {
   const afterSymbol = () => {
     return isVisiblePassword ? (
       <span onClick={togglePasswordVisibility}>
-        <AiFillEyeInvisible />
+        <AiFillEyeInvisible className="w-25" />
       </span>
     ) : (
       <span onClick={togglePasswordVisibility}>
@@ -99,7 +99,7 @@ export default function SignUpForm() {
           <div className={styles.auth_box_button}>
             {BUTTON_CONTENT.map((content) => {
               return (
-                <LightButton key={content.key} className="m-1  w-100">
+                <LightButton key={content.key}>
                   <span>{content.symbol}</span> {content.title}
                 </LightButton>
               );

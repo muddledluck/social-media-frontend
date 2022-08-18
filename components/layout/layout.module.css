@@ -1,5 +1,33 @@
 .customContainer {
   margin-left: 200px;
   padding: 15px;
-  background: #f7f7f7;
+  background: light;
+}
+
+/* @media screen and (max-width: 765px) {
+  .customContainer{
+    margin-left: 0px;
+  }
+} */
+
+@media screen and (max-width: 480px) {
+  .customContainer{
+    margin-left: 0px;
+  }
+
+  .customContainer {
+  margin-left: 0px;
+  padding: 10px;
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .customContainer{
+    margin-left: 0px;
+  }
+
+  .customContainer {
+  margin-left: 0px;
+  padding: 10px;
+  }
 }

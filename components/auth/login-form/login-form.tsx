@@ -137,7 +137,7 @@ export default function LoginForm() {
             </span>
           </div>
 
-          <button type="submit" className="btn btn-primary w-100 rounded-5">
+          <button type="submit" className="btn btn-primary py-1 fs-3 w-100 rounded-5">
             Login
           </button>
         </Form>

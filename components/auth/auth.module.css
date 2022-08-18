@@ -1,9 +1,10 @@
 .auth_box {
   width: 30%;
-  height: 80%;
+  height: auto;
   background-color: #fff;
   color: #4e5d78;
   font-weight: 500;
+  border-radius: 6px;
 }
 .auth_box form {
   display: flex;
@@ -63,4 +64,32 @@
 .auth_box_form_footer a {
   text-decoration: none;
   color: #0000ee;
+}
+
+@media screen and (max-width: 1475px) {
+.auth_box {
+  width: 50%;
+  background-color: #fff;
+}
+}
+
+@media screen and (max-width: 991px) {
+.auth_box {
+  width: 50%;
+  background-color: #fff;
+}
+}
+
+@media screen and (max-width: 765px) {
+.auth_box {
+  width: 80%;
+  background-color: #fff;
+}
+}
+
+@media screen and (max-width: 480px) {
+.auth_box {
+  width: 100%;
+  background-color: #fff;
+}
 }

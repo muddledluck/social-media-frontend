@@ -49,7 +49,7 @@ const InputGroup: React.FC<InputGroupPropsInterface> = ({
         value={value}
         type={type || "text"}
       />
-      <span className={`${styles.input_group_after_icon} input-group-text`}>
+      <span className={`${styles.input_group_after_icon } input-group-text search_input`}>
         {afterSymbol}
       </span>
     </div>

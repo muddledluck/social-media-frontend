@@ -1,3 +1,10 @@
-.fixed_col {
+/* .fixed_col {
   margin-left: 950px;
+} */
+
+.static_md{
+  position: fixed;
+  overflow: auto;
+  background-color: white;
+  height: 25rem;
 }

@@ -6,7 +6,7 @@ interface FormWrapperPropsInterface {
 
 const FormWrapper: React.FC<FormWrapperPropsInterface> = ({ children }) => {
   return (
-    <div className="vh-100 d-flex justify-content-center align-items-center ">
+    <div className="pt-1 d-flex justify-content-center">
       <div className={`${styles.auth_box} p-3`}>{children}</div>
     </div>
   );

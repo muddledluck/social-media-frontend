@@ -52,10 +52,8 @@ export default function HomePage() {
                 );
               })}
             </div>
-            <div
-              // className={`col-md-3 position-fixed w-auto ${styles.fixed_col}`}
-              className={`col-md-3`}
-            >
+            <div /*className={`col-md-3 position-fixed w-auto ${styles.fixed_col}`} */ className={`col-md-3`}>
+             <div className={`static_md`}>
               <CustomCard
                 title={"You Might Like"}
                 icon={
@@ -74,15 +72,8 @@ export default function HomePage() {
                   return <SuggestedUserComponent key={idx} {...item} />;
                 })}
               </CustomCard>
-              <CustomCard
-                title={"Recent Event"}
-                icon={
-                  <div
-                    style={{
-                      fontSize: "15px",
-                      cursor: "pointer",
-                    }}
-                  >
+              <CustomCard title={"Recent Event"} icon={
+                <div style={{fontSize: "15px", cursor: "pointer",}}>
                     <HorizontalThreeDots />
                   </div>
                 }
@@ -106,9 +97,14 @@ export default function HomePage() {
                 <Birthday />
               </CustomCard>
             </div>
+            </div>
           </div>
         </div>
-        <div className="col-md-3">chat</div>
+        <div className="col-md-3">
+          <div style={{position:"fixed", overflow:"auto"}}>
+            <h1>Chat</h1>
+          </div>
+        </div>
       </div>
     </>
   );

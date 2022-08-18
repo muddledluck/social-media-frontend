@@ -11,6 +11,7 @@ import {
   AiOutlineShareAlt,
 } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
+import { MdList } from "react-icons/md";
 const ICONS = {
   CameraVideo: VscDeviceCameraVideo,
   InsertPhoto: MdOutlineInsertPhoto,
@@ -24,6 +25,7 @@ const ICONS = {
   SendOutline: AiOutlineSend,
   HorizontalThreeDots: BsThreeDots,
   CancelCross: MdOutlineCancel,
+  ListSidebar: MdList
 };
 
 export default ICONS;
